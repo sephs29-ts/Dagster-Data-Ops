@@ -2,7 +2,7 @@ from dagster import asset, AssetExecutionContext
 import requests
 from typing import List
 
-@asset(config_schema={"intercom_api_token": str})
+# @asset(config_schema={"intercom_api_token": str})
 # def fetch_company_names_from_intercom(context: AssetExecutionContext):
 #     """
 #     This fetches data from Intercom API
