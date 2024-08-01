@@ -3,30 +3,38 @@ import requests
 from typing import List
 
 @asset(config_schema={"intercom_api_token": str})
-def fetch_company_names_from_intercom(context: AssetExecutionContext):
-    """
-    This fetches data from Intercom API
-    """
-    api_token = context.solid_config["intercom_api_token"]
-    url = "https://api.intercom.io/companies"
+# def fetch_company_names_from_intercom(context: AssetExecutionContext):
+#     """
+#     This fetches data from Intercom API
+#     """
+#     api_token = context.solid_config["intercom_api_token"]
+#     url = "https://api.intercom.io/companies"
     
-    headers = {
-        "Authorization": f"Bearer dG9rOmQyMjJmMzRkXzRlYTZfNDEyZl9iNzIzXzYyOGY5ZjllZmViYzoxOjA=",
-        "Accept": "application/json"
-    }
+#     headers = {
+#         "Authorization": f"Bearer dG9rOmQyMjJmMzRkXzRlYTZfNDEyZl9iNzIzXzYyOGY5ZjllZmViYzoxOjA=",
+#         "Accept": "application/json"
+#     }
 
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
+#     response = requests.get(url, headers=headers)
+#     response.raise_for_status()
 
-    companies = response.json()["companies"]
-    company_names = [company["name"] for company in companies]
+#     companies = response.json()["companies"]
+#     company_names = [company["name"] for company in companies]
 
-    context.log.info(f"Fetched {len(company_names)} company names from Intercom.")
-    return company_names
+#     context.log.info(f"Fetched {len(company_names)} company names from Intercom.")
+#     return company_names
 
+@asset
+def my_first_asset( context: AssetExecutionContext):
+    """
+    This is the first asset
+    """
+    data = [1,2,3]
+    context.log.infor(f"Output data is: {data}")
+    return data
 
 # @asset
-@asset(deps=[fetch_company_names_from_intercom])
+@asset(deps=[my_first_asset])
 def my_second_asset(context: AssetExecutionContext):
     """
     This is the second asset
